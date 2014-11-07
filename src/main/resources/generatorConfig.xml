@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <classPathEntry location="C:\mywork\maven\maven-repos\postgresql\postgresql\9.1-901-1.jdbc4\postgresql-9.1-901-1.jdbc4.jar" 
+		/> -->
+	<classPathEntry
+		location="E:\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" />
+	<context id="context1" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		 <plugin type="org.mybatis.generator.plugin.PaginationMysqlPlugin" /> 
+		<!-- <plugin type="org.mybatis.generator.plugin.RowBoundsPlugin" /> -->
+		<!-- <plugin type="org.mybatis.generator.plugin.PaginationPGPlugin" /> -->
+		<plugin type="org.mybatis.generator.plugin.CommentPlugin">
+			<!-- 制定java bean的作者，默认情况下会读取计算机当前用户作为作者 -->
+			<property name="modelClassAuthor" value="xianwen.tan" />
+		</plugin>
+
+		<commentGenerator>
+			<!-- 不生成原生的注解信息 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/world" userId="root"
+			password="root" />
+
+		<javaTypeResolver >
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.jingwei.db.domain"
+			targetProject="test">
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.jingwei.db.mapper"
+			targetProject="test" />
+		<javaClientGenerator targetPackage="com.jingwei.db.mapper"
+			targetProject="test" type="XMLMAPPER" />
+		<!-- <javaClientGenerator targetPackage="com.jingwei.db.mapper" targetProject="test" 
+			type="XMLMAPPER" /> -->
+		<table tableName="city" domainObjectName="City">
+			<!-- <generatedKey column="ID" identity="true" sqlStatement="mysql" /> -->
+			<columnOverride column="Name" property="cityName" ></columnOverride>
+			<ignoreColumn column="Population" />
+		</table>
+
+		<!-- <table schema="cs" tableName="biz_service_offline_confirm" domainObjectName="BizServiceOfflineConfirm" 
+			/> <table schema="cs" tableName="refund" domainObjectName="Refund" /> <table 
+			schema="cs" tableName="biz_service_confirm_info" domainObjectName="BizServiceConfirmInfo" 
+			/> <table schema="cs" tableName="cabin" domainObjectName="Cabin" /> <table 
+			schema="cs" tableName="airline" domainObjectName="Airline" /> <table schema="cs" 
+			tableName="airport" domainObjectName="Airport" /> -->
+	</context>
+</generatorConfiguration>
