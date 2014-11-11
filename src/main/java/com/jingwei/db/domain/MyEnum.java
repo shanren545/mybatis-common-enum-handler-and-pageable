@@ -1,4 +1,4 @@
-package com.jingwei.controller;
+package com.jingwei.db.domain;
 
 import com.jingwei.IEnum;
 

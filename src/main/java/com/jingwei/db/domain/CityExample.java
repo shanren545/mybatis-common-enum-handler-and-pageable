@@ -1,5 +1,7 @@
 package com.jingwei.db.domain;
 
+import com.jingwei.PageInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,7 @@ public class CityExample {
 
     protected List<Criteria> oredCriteria;
 
-    protected int limitStart = -1;
-
-    protected int limitEnd = -1;
+    protected PageInfo pageInfo;
 
     public CityExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -67,20 +67,15 @@ public class CityExample {
         distinct = false;
     }
 
-    public void setLimitStart(int limitStart) {
-        this.limitStart=limitStart;
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+        if(null != pageInfo){
+            orderByClause = pageInfo.getSort();
+        }
     }
 
-    public int getLimitStart() {
-        return limitStart;
-    }
-
-    public void setLimitEnd(int limitEnd) {
-        this.limitEnd=limitEnd;
-    }
-
-    public int getLimitEnd() {
-        return limitEnd;
+    public PageInfo getPageInfo() {
+        return pageInfo;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -404,63 +399,123 @@ public class CityExample {
             return (Criteria) this;
         }
 
-        public Criteria andCodeEqualTo(String value) {
+        public Criteria andCodeEqualTo(MyEnum value) {
             addCriterion("code =", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotEqualTo(String value) {
+        public Criteria andCodeNotEqualTo(MyEnum value) {
             addCriterion("code <>", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThan(String value) {
+        public Criteria andCodeGreaterThan(MyEnum value) {
             addCriterion("code >", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThanOrEqualTo(String value) {
+        public Criteria andCodeGreaterThanOrEqualTo(MyEnum value) {
             addCriterion("code >=", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThan(String value) {
+        public Criteria andCodeLessThan(MyEnum value) {
             addCriterion("code <", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThanOrEqualTo(String value) {
+        public Criteria andCodeLessThanOrEqualTo(MyEnum value) {
             addCriterion("code <=", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotLike(String value) {
-            addCriterion("code not like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeIn(List<String> values) {
+        public Criteria andCodeIn(List<MyEnum> values) {
             addCriterion("code in", values, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotIn(List<String> values) {
+        public Criteria andCodeNotIn(List<MyEnum> values) {
             addCriterion("code not in", values, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeBetween(String value1, String value2) {
+        public Criteria andCodeBetween(MyEnum value1, MyEnum value2) {
             addCriterion("code between", value1, value2, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotBetween(String value1, String value2) {
+        public Criteria andCodeNotBetween(MyEnum value1, MyEnum value2) {
             addCriterion("code not between", value1, value2, "code");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssIsNull() {
+            addCriterion("longtextsss is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssIsNotNull() {
+            addCriterion("longtextsss is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssEqualTo(String value) {
+            addCriterion("longtextsss =", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssNotEqualTo(String value) {
+            addCriterion("longtextsss <>", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssGreaterThan(String value) {
+            addCriterion("longtextsss >", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssGreaterThanOrEqualTo(String value) {
+            addCriterion("longtextsss >=", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssLessThan(String value) {
+            addCriterion("longtextsss <", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssLessThanOrEqualTo(String value) {
+            addCriterion("longtextsss <=", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssLike(String value) {
+            addCriterion("longtextsss like", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssNotLike(String value) {
+            addCriterion("longtextsss not like", value, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssIn(List<String> values) {
+            addCriterion("longtextsss in", values, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssNotIn(List<String> values) {
+            addCriterion("longtextsss not in", values, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssBetween(String value1, String value2) {
+            addCriterion("longtextsss between", value1, value2, "longtextsss");
+            return (Criteria) this;
+        }
+
+        public Criteria andLongtextsssNotBetween(String value1, String value2) {
+            addCriterion("longtextsss not between", value1, value2, "longtextsss");
             return (Criteria) this;
         }
     }

@@ -16,15 +16,21 @@ public interface CityMapper {
 
     int insertSelective(City record);
 
+    List<City> selectByExampleWithBLOBs(CityExample example);
+
     List<City> selectByExample(CityExample example);
 
     City selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") City record, @Param("example") CityExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") City record, @Param("example") CityExample example);
+
     int updateByExample(@Param("record") City record, @Param("example") CityExample example);
 
     int updateByPrimaryKeySelective(City record);
+
+    int updateByPrimaryKeyWithBLOBs(City record);
 
     int updateByPrimaryKey(City record);
 }

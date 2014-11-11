@@ -19,22 +19,24 @@ public class PageInfo implements Serializable {
 	protected int pageSize = 20;
 	protected String sort;
 
+	public static final int MAX_PAGE_SIZE = 1000;
+
 	public PageInfo() {
 	}
 
 	public PageInfo(int pageNo) {
-		this.pageNo = pageNo;
+		setPageNo(pageNo);
 	}
 
 	public PageInfo(int pageNo, int pageSize) {
-		this.pageNo = pageNo;
-		this.pageSize = pageSize;
+		setPageNo(pageNo);
+		setPageSize(pageSize);
 	}
 
 	public PageInfo(int pageNo, int pageSize, String sort) {
-		this.pageNo = pageNo;
-		this.pageSize = pageSize;
-		this.sort = sort;
+		setPageNo(pageNo);
+		setPageSize(pageSize);
+		setSort(sort);
 	}
 
 	/**
@@ -62,7 +64,7 @@ public class PageInfo implements Serializable {
 	 * @return the offset to be taken
 	 */
 	public long getOffset() {
-		long offset = ((long)pageSize) * pageNo;
+		long offset = ((long) getPageNo()) * getPageSize();
 		return offset < 0 ? 0 : offset;
 	}
 
@@ -118,10 +120,15 @@ public class PageInfo implements Serializable {
 	}
 
 	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
+		this.pageNo = pageNo < 0 ? 0 : pageNo;
 	}
 
 	public void setPageSize(int pageSize) {
+		if (pageSize < 1) {
+			pageSize = 1;
+		} else if (pageSize > MAX_PAGE_SIZE) {// 防止拖死数据库
+			pageSize = MAX_PAGE_SIZE;
+		}
 		this.pageSize = pageSize;
 	}
 

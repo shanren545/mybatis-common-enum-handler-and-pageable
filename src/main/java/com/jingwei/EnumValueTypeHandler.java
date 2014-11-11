@@ -7,16 +7,19 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedTypes;
+
+import com.jingwei.db.domain.MyEnum;
 
 /**
  * @author xianwen.tan 枚举与数据库tinyint的映射类处理器
  */
-public class EnumCodeTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
+public class EnumValueTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 
 	private Class<E> type;
 	private final E[] enums;
-
-	public EnumCodeTypeHandler(Class<E> type) {
+	
+	public EnumValueTypeHandler(Class<E> type) {
 		if (type == null) {
 			throw new IllegalArgumentException("Type argument cannot be null");
 		}
@@ -32,6 +35,7 @@ public class EnumCodeTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 			throw new IllegalArgumentException(type.getSimpleName()
 					+ " does not represent an enum type.");
 		}
+		
 	}
 
 	@Override

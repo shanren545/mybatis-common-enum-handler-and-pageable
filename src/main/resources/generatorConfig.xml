@@ -3,13 +3,13 @@
 <generatorConfiguration>
 	<!-- <classPathEntry location="C:\mywork\maven\maven-repos\postgresql\postgresql\9.1-901-1.jdbc4\postgresql-9.1-901-1.jdbc4.jar" 
 		/> -->
-	<classPathEntry
-		location="E:\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" />
+	<!-- 如果驱动在classpath下，例如通过maven依赖进来，则可以不在这里指定驱动位置 -->
+	<!-- <classPathEntry location="E:\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" 
+		/> -->
 	<context id="context1" targetRuntime="MyBatis3">
 		<property name="javaFileEncoding" value="UTF-8" />
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
-		 <plugin type="org.mybatis.generator.plugin.PaginationMysqlPlugin" /> 
-		<!-- <plugin type="org.mybatis.generator.plugin.RowBoundsPlugin" /> -->
+		<plugin type="org.mybatis.generator.plugin.MysqlPagingPlugin" />
 		<!-- <plugin type="org.mybatis.generator.plugin.PaginationPGPlugin" /> -->
 		<plugin type="org.mybatis.generator.plugin.CommentPlugin">
 			<!-- 制定java bean的作者，默认情况下会读取计算机当前用户作为作者 -->
@@ -24,22 +24,23 @@
 			connectionURL="jdbc:mysql://127.0.0.1:3306/world" userId="root"
 			password="root" />
 
-		<javaTypeResolver >
+		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
 		<javaModelGenerator targetPackage="com.jingwei.db.domain"
-			targetProject="test">
+			targetProject="common">
 		</javaModelGenerator>
 		<sqlMapGenerator targetPackage="com.jingwei.db.mapper"
-			targetProject="test" />
+			targetProject="common" />
 		<javaClientGenerator targetPackage="com.jingwei.db.mapper"
-			targetProject="test" type="XMLMAPPER" />
+			targetProject="common" type="XMLMAPPER" />
 		<!-- <javaClientGenerator targetPackage="com.jingwei.db.mapper" targetProject="test" 
 			type="XMLMAPPER" /> -->
 		<table tableName="city" domainObjectName="City">
 			<!-- <generatedKey column="ID" identity="true" sqlStatement="mysql" /> -->
-			<columnOverride column="Name" property="cityName" ></columnOverride>
+			<columnOverride column="Name" property="cityName"></columnOverride>
+			<columnOverride column="code" javaType="com.jingwei.controller.MyEnum"></columnOverride>
 			<ignoreColumn column="Population" />
 		</table>
 

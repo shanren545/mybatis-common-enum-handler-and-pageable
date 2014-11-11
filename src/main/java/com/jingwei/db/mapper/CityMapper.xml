@@ -6,7 +6,11 @@
     <result column="Name" property="cityName" jdbcType="CHAR" />
     <result column="CountryCode" property="countrycode" jdbcType="CHAR" />
     <result column="District" property="district" jdbcType="CHAR" />
-    <result column="code" property="code" jdbcType="CHAR" />
+    <result column="code" property="code" jdbcType="TINYINT" />
+    <result column="longtextsss" property="longtextsss" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jingwei.db.domain.City" extends="BaseResultMap" >
+    <result column="largesss" property="largesss" jdbcType="VARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,8 +71,30 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, Name, CountryCode, District, code
+    ID, Name, CountryCode, District, code, longtextsss
   </sql>
+  <sql id="Blob_Column_List" >
+    largesss
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jingwei.db.domain.CityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pageInfo != null" >
+       limit ${pageInfo.offset} , ${pageInfo.pageSize}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jingwei.db.domain.CityExample" >
     select
     <if test="distinct" >
@@ -82,13 +108,15 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-    <if test="limitStart >= 0" >
-       limit ${limitStart} , ${limitEnd}
+    <if test="pageInfo != null" >
+       limit ${pageInfo.offset} , ${pageInfo.pageSize}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from city
     where ID = #{id,jdbcType=INTEGER}
   </select>
@@ -104,9 +132,11 @@
   </delete>
   <insert id="insert" parameterType="com.jingwei.db.domain.City" >
     insert into city (ID, Name, CountryCode, 
-      District, code)
+      District, code, longtextsss, 
+      largesss)
     values (#{id,jdbcType=INTEGER}, #{cityName,jdbcType=CHAR}, #{countrycode,jdbcType=CHAR}, 
-      #{district,jdbcType=CHAR}, #{code,jdbcType=CHAR})
+      #{district,jdbcType=CHAR}, #{code,jdbcType=TINYINT}, #{longtextsss,jdbcType=VARCHAR}, 
+      #{largesss,jdbcType=VARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.jingwei.db.domain.City" >
     insert into city
@@ -126,6 +156,12 @@
       <if test="code != null" >
         code,
       </if>
+      <if test="longtextsss != null" >
+        longtextsss,
+      </if>
+      <if test="largesss != null" >
+        largesss,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -141,7 +177,13 @@
         #{district,jdbcType=CHAR},
       </if>
       <if test="code != null" >
-        #{code,jdbcType=CHAR},
+        #{code,jdbcType=TINYINT},
+      </if>
+      <if test="longtextsss != null" >
+        #{longtextsss,jdbcType=VARCHAR},
+      </if>
+      <if test="largesss != null" >
+        #{largesss,jdbcType=VARBINARY},
       </if>
     </trim>
   </insert>
@@ -167,9 +209,28 @@
         District = #{record.district,jdbcType=CHAR},
       </if>
       <if test="record.code != null" >
-        code = #{record.code,jdbcType=CHAR},
+        code = #{record.code,jdbcType=TINYINT},
+      </if>
+      <if test="record.longtextsss != null" >
+        longtextsss = #{record.longtextsss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largesss != null" >
+        largesss = #{record.largesss,jdbcType=VARBINARY},
       </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update city
+    set ID = #{record.id,jdbcType=INTEGER},
+      Name = #{record.cityName,jdbcType=CHAR},
+      CountryCode = #{record.countrycode,jdbcType=CHAR},
+      District = #{record.district,jdbcType=CHAR},
+      code = #{record.code,jdbcType=TINYINT},
+      longtextsss = #{record.longtextsss,jdbcType=VARCHAR},
+      largesss = #{record.largesss,jdbcType=VARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,7 +241,8 @@
       Name = #{record.cityName,jdbcType=CHAR},
       CountryCode = #{record.countrycode,jdbcType=CHAR},
       District = #{record.district,jdbcType=CHAR},
-      code = #{record.code,jdbcType=CHAR}
+      code = #{record.code,jdbcType=TINYINT},
+      longtextsss = #{record.longtextsss,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,9 +260,25 @@
         District = #{district,jdbcType=CHAR},
       </if>
       <if test="code != null" >
-        code = #{code,jdbcType=CHAR},
+        code = #{code,jdbcType=TINYINT},
+      </if>
+      <if test="longtextsss != null" >
+        longtextsss = #{longtextsss,jdbcType=VARCHAR},
+      </if>
+      <if test="largesss != null" >
+        largesss = #{largesss,jdbcType=VARBINARY},
       </if>
     </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jingwei.db.domain.City" >
+    update city
+    set Name = #{cityName,jdbcType=CHAR},
+      CountryCode = #{countrycode,jdbcType=CHAR},
+      District = #{district,jdbcType=CHAR},
+      code = #{code,jdbcType=TINYINT},
+      longtextsss = #{longtextsss,jdbcType=VARCHAR},
+      largesss = #{largesss,jdbcType=VARBINARY}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jingwei.db.domain.City" >
@@ -208,7 +286,8 @@
     set Name = #{cityName,jdbcType=CHAR},
       CountryCode = #{countrycode,jdbcType=CHAR},
       District = #{district,jdbcType=CHAR},
-      code = #{code,jdbcType=CHAR}
+      code = #{code,jdbcType=TINYINT},
+      longtextsss = #{longtextsss,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
