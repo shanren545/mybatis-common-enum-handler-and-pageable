@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedTypes;
-
-import com.jingwei.db.domain.MyEnum;
 
 /**
  * @author xianwen.tan 枚举与数据库tinyint的映射类处理器

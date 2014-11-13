@@ -18,12 +18,20 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
+	
+	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/world" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
 
 	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean> -->
-	<bean id="sqlSessionFactory" class="com.jingwei.MybatisSqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="com.jingwei.MybatisSqlSessionFactoryBean" >
 		<property name="dataSource" ref="myDataSource" />
 		<property name="enumBasePackages" value="com.jingwei" />
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
