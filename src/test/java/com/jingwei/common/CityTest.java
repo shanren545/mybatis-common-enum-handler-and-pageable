@@ -44,7 +44,7 @@ public class CityTest {
 		City city = cityMapper.selectByPrimaryKey(1);
 		Assert.assertNotNull(city);
 
-		Map<String, DataSource> map = ctx.getBeansOfType(DataSource.class);
+		//Map<String, DataSource> map = ctx.getBeansOfType(DataSource.class);
 
 		CityExample ex = new CityExample();
 		ex.setPageInfo(new PageInfo(3, 20, "name desc"));

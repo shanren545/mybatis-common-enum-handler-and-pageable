@@ -51,10 +51,28 @@ public class AppConfig {
 	@Bean
 	public MapperScannerConfigurer mapper() {
 		MapperScannerConfigurer cfg = new MapperScannerConfigurer();
+		cfg.setSqlSessionFactoryBeanName("mybatis");
+		cfg.setBasePackage("com.jingwei.db.mapper");
+		return cfg;
+	}
+	
+	@Bean
+	public MapperScannerConfigurer mapper1() {
+		MapperScannerConfigurer cfg = new MapperScannerConfigurer();
+		cfg.setSqlSessionFactoryBeanName("mybatis1");
 		cfg.setBasePackage("com.jingwei.db.mapper");
 		return cfg;
 	}
 
+	@Bean
+	public MybatisSqlSessionFactoryBean mybatis1(List<DataSource> list) {
+		MybatisSqlSessionFactoryBean b = new MybatisSqlSessionFactoryBean();
+		b.setDataSource(datasourc());
+		b.setEnumBasePackages("com.jingwei");
+		b.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+		return b;
+	}
+	
 	@Bean
 	public MybatisSqlSessionFactoryBean mybatis(List<DataSource> list) {
 		MybatisSqlSessionFactoryBean b = new MybatisSqlSessionFactoryBean();
