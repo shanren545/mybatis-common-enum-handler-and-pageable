@@ -9,11 +9,11 @@
 	<context id="context1" targetRuntime="MyBatis3">
 		<property name="javaFileEncoding" value="UTF-8" />
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
-		<plugin type="org.mybatis.generator.plugin.MysqlPagingPlugin" />
-		<!-- <plugin type="org.mybatis.generator.plugin.PaginationPGPlugin" /> -->
-		<plugin type="org.mybatis.generator.plugin.CommentPlugin">
+		<plugin type="com.shanren.mybatis.generator.plugin.MysqlPagingPlugin" />
+		<!-- <plugin type="com.shanren.mybatis.generator.plugin.PaginationPGPlugin" /> -->
+		<plugin type="com.shanren.mybatis.generator.plugin.CommentPlugin">
 			<!-- 制定java bean的作者，默认情况下会读取计算机当前用户作为作者 -->
-			<property name="modelClassAuthor" value="xianwen.tan" />
+			<property name="modelClassAuthor" value="shanren" />
 		</plugin>
 
 		<commentGenerator>
@@ -28,19 +28,19 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.jingwei.db.domain"
+		<javaModelGenerator targetPackage="com.shanren.domain"
 			targetProject="common">
 		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="com.jingwei.db.mapper"
+		<sqlMapGenerator targetPackage="com.shanren.mapper"
 			targetProject="common" />
-		<javaClientGenerator targetPackage="com.jingwei.db.mapper"
+		<javaClientGenerator targetPackage="com.shanren.mapper"
 			targetProject="common" type="XMLMAPPER" />
-		<!-- <javaClientGenerator targetPackage="com.jingwei.db.mapper" targetProject="test" 
+		<!-- <javaClientGenerator targetPackage="com.shanren.mapper" targetProject="test" 
 			type="XMLMAPPER" /> -->
 		<table tableName="city" domainObjectName="City">
 			<!-- <generatedKey column="ID" identity="true" sqlStatement="mysql" /> -->
 			<columnOverride column="Name" property="cityName"></columnOverride>
-			<columnOverride column="code" javaType="com.jingwei.controller.MyEnum"></columnOverride>
+			<columnOverride column="code" javaType="com.shanren.controller.MyEnum"></columnOverride>
 			<ignoreColumn column="Population" />
 		</table>
 

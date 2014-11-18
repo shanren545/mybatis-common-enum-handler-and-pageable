@@ -4,10 +4,5 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeHandlers>
-		<!-- <typeHandler handler="com.jingwei.EnumCodeTypeHandler"  /> -->
-		<!-- <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.jingwei.controller.MyEnum"/> -->
-	<!-- <typeHandler handler="com.jingwei.EnumValueTypeHandler" javaType="com.jingwei.controller.MyEnum"/> -->
 	</typeHandlers>
-	<!-- <objectWrapperFactory type="com.jingwei.MyObjectWrapperFactory" ></objectWrapperFactory> 
- -->
 </configuration>
